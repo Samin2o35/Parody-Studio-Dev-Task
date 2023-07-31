@@ -36,11 +36,11 @@ public class Movement : MonoBehaviour
 
     void GroundMovement()
     {
-        //get input from player
+        //Get input from player
         horizontalInput = Input.GetAxis("Horizontal");
         forwardInput = Input.GetAxis("Vertical");
 
-        //translate input to ground movement
+        //Translate input to ground movement
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * forwardInput);
         transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * horizontalInput);
 
@@ -48,7 +48,7 @@ public class Movement : MonoBehaviour
 
     void Jump()
     {
-        //check if jump button pressed before jumping
+        //Check if jump button pressed before jumping
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
