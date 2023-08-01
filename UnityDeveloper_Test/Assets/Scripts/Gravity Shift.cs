@@ -42,29 +42,29 @@ public class GravityShift : MonoBehaviour
     void SetGravityDir()
     {
         //Change gravity direction according to arrow key pressed
-        if(Input.GetKey(KeyCode.I))
+        if(Input.GetKey(KeyCode.UpArrow))
         {
             currentGravityDirection = Vector3.up;
             ShowHologram();
         }
-        else if(Input.GetKey(KeyCode.K))
+        else if(Input.GetKey(KeyCode.DownArrow))
         {
             currentGravityDirection = Vector3.down;
             ShowHologram();
         }
-        else if(Input.GetKey(KeyCode.J))
+        else if(Input.GetKey(KeyCode.RightArrow))
         {
             currentGravityDirection = Vector3.left;
             ShowHologram();
         }
-        else if(Input.GetKey(KeyCode.L))
+        else if(Input.GetKey(KeyCode.LeftArrow))
         {
             currentGravityDirection = Vector3.right;
             ShowHologram();
         }
 
         //Toggle gravity
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             isGravityShifted = !isGravityShifted;
             hologramInstance.SetActive(isGravityShifted);
