@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     private Rigidbody rb;
+    private Animator anim;
 
     public float moveSpeed;
     private float horizontalInput;
@@ -16,6 +17,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -31,6 +33,7 @@ public class Movement : MonoBehaviour
         if(collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            anim.SetBool("isFalling", false);
         }
     }
 
@@ -44,6 +47,18 @@ public class Movement : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * forwardInput);
         transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * horizontalInput);
 
+        //Animations
+        if(horizontalInput == 0 && forwardInput == 0)
+        {
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isRunning", false) ;
+        }
+        else
+        {
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isRunning", true);
+        }
+
     }
 
     void Jump()
@@ -51,6 +66,7 @@ public class Movement : MonoBehaviour
         //Check if jump button pressed before jumping
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
+            anim.SetBool("isFalling", true);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
         }
